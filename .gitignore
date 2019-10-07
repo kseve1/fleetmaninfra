@@ -7,3 +7,9 @@
 
 # .tfvars files
 *.tfvars
+
+# Ignore some other files
+*.swp
+*.pyc
+*.zip
+*.patch
