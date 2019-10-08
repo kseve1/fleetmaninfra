@@ -1,7 +1,10 @@
 # Steps to configure EKS cluster
 
 # clone this repository
-git clone https://github.com/nishantnikhil-github/terraform-k8s-cluster-setup.git
+git clone https://github.com/kseve1/freemaninfra.git
+
+# Change into working directory
+cd  terraform/k8s/setup-Blue-team-eks-cluster
 
 # initialise terraform
 terraform init
