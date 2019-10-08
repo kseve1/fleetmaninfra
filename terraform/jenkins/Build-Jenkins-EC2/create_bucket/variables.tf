@@ -9,3 +9,7 @@ variable "name_tag" {
 variable "owner_tag" {
   default = "Blue Team"
 }
+
+variable "aws_region" {
+  default = ""
+}
