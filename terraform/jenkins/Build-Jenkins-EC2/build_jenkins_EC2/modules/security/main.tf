@@ -3,7 +3,6 @@ provider "aws" {
 }
 
 resource "aws_security_group" "blue-sg" {
-  //name = "blue-ericechter-instance-${random_id.myrandom.hex}"
   name = "blue-sg"
   tags = {
     Name  = "Blue Team SG"
