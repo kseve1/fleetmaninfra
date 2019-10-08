@@ -10,7 +10,7 @@ Location: terraform/jenkins/create_bucket
 
 
 Building the Jenkins EC2 instance (Terraform)
-Location: terraform/jenkins/Build-Jenkins-EC2
+Location: fleetmaninfra/terraform/jenkins/Build-Jenkins-EC2/build_jenkins_EC2/app/
 - terraform init -backend-config=backend.hcl
 - terraform plan
 - terraform apply
