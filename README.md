@@ -1,6 +1,11 @@
 # fleetmaninfra
 Exercise/project fleetman app (lift and shift)
 
+Create Jenkins EC2 AMI - with ansible/docker/kubectl/terraform (Packer)
+Location: fleetmaninfra/packer/jenkins-ec2/
+- packer validate packer_jenkins_ami.json
+- packer build packer_jenkins_ami.json
+
 
 S3 Bucket creation (Terraform)
 Location: terraform/jenkins/create_bucket
