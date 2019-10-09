@@ -22,7 +22,7 @@
     "ssh_username": "ubuntu",
     "ami_name": "blue-teams-jenkins-image-{{timestamp}}",
     "tags": {
-       "Name": "Blue-team-jenkins+A+D+K+T"
+       "Name": "Blue-team-jenkins-with-tooling"
     }
   }],
   "provisioners": [
@@ -32,6 +32,8 @@
        [
        "./install_ansible.sh",
        "./install_terraform.sh",
+       "./install_make.sh",
+       "./install_packer.sh",
        "./install_kubectl.sh"
        ]
    },

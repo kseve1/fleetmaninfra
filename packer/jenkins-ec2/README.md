@@ -9,4 +9,6 @@ The following tools are currently provisioned using the relevant install_$TOOL.s
 1. Ansible
 2. Docker
 3. Kubectl
-4. Terraform
+4. Terraform (/usr/local/bin)
+5. Packer (/usr/local/bin)
+6. aws-iam-authenticator (/usr/local/bin)
