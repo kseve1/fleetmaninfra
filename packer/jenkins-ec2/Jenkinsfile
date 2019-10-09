@@ -2,24 +2,32 @@
 
 pipeline {
     agent any
-
     stages {
         stage('Initialise') {
             steps {
-		echo "Initialising job - cloning repo"
-                sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+		      sh 'rm -rf fleetmaninfra'
+              	      sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+		      echo "Initialising job - cloning repo"
+                      dir("fleetmaninfra/packer/jenkins-ec2") {
+                      sh 'pwd'
+                  }
             }
         }
-        stage('Test') {
+        stage('Validate') {
             steps {
-		echo "Validating PACKER json..."
-                echo 'packer validate packer/jenkins-ec2/packer_jenkins_ami.json'
+                      dir("fleetmaninfra/packer/jenkins-ec2") {
+                      echo "Validating PACKER json..."
+                      sh 'packer validate packer_jenkins_ami.json'
+                  }
+		      
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying AMI to AWS...'
-                sh 'packer build packer/jenkins-ec2/packer_jenkins_ami.json' 
+                     dir("fleetmaninfra/packer/jenkins-ec2") {
+                     echo "Deploying AMI to AWS..."
+                     sh 'packer build packer_jenkins_ami.json'
+                }
             }
         }
     }
