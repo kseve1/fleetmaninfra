@@ -32,6 +32,7 @@
        [
        "./install_ansible.sh",
        "./install_terraform.sh",
+       "./install_make.sh",
        "./install_packer.sh",
        "./install_kubectl.sh",
        "./install_aws_iam_authenticator.sh"
