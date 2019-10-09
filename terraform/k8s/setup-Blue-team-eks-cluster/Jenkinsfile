@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    stages {
+        stage('Initialise') {
+            steps {
+		      sh 'rm -rf fleetmaninfra'
+              sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+		      echo "Initialising job - cloning repo"
+                  }
+            }
+        stage('TF-init') {
+            steps {
+                      dir("fleetmaninfra/terraform/k8s/setup-Blue-team-eks-cluster") {
+                      echo "Initializing Terraform..."
+                      sh 'terraform init -backend-config=backend.hcl'
+                  }
+               }
+            }
+        stage('TF-plan') {
+            steps {
+                     dir("fleetmaninfra/terraform/k8s/setup-Blue-team-eks-cluster") {
+                     echo "Applying Terraform..."
+                     sh 'terraform plan'
+                     }
+                  }
+            }
+        stage('Approval') {
+            steps {
+                script {
+                        def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+                       }
+                  }
+            }
+        stage('TF-apply') {
+            steps {
+                     dir("fleetmaninfra/terraform/k8s/setup-Blue-team-eks-cluster") {
+                     echo "Applying Terraform..."
+                     sh 'terraform apply'
+                     }
+                  }
+            }
+        }
+    }
