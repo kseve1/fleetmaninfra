@@ -19,3 +19,32 @@ Location: fleetmaninfra/terraform/jenkins/Build-Jenkins-EC2/build_jenkins_EC2/ap
 - terraform init -backend-config=backend.hcl
 - terraform plan
 - terraform apply
+
+
+Building the DEVELOPMENT AWS EKS environment (Terraform)
+Location: fleetmaninfra/terraform/k8s/setup-Blue-team-DEV-eks-cluster
+- terraform init -backend-config=backend.hcl
+- terraform plan -out plan
+- terraform apply plan
+
+
+Building the PRODUCTION AWS EKS environment (Terraform)
+Location: fleetmaninfra/terraform/k8s/setup-Blue-team-PROD-eks-cluster
+- terraform init -backend-config=backend.hcl
+- terraform plan -out plan
+- terraform apply plan
+
+
+Manually Uploading docker images to ECR (account + repo specific)
+- docker tag webapp:latest 090107652998.dkr.ecr.eu-central-1.amazonaws.com/blueteam:fm-webapp
+- docker push 090107652998.dkr.ecr.eu-central-1.amazonaws.com/blueteam:fm-webapp
+
+Repeat for queue, api-gateway, position-simulator, position-tracker
+
+
+Manually start/stop the webapp in the development cluster (in the namespace blue-team-dev)
+Location: fleetmaninfra/eks
+- aws eks --region eu-central-1 update-kubeconfig --name Blue-team-DEV-terraform-eks-cluster
+- kubectl config use-context arn:aws:eks:eu-central-1:090107652998:cluster/Blue-team-DEV-terraform-eks-cluster
+- make deloy
+- make clean
