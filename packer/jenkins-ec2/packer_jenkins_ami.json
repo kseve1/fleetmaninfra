@@ -22,7 +22,7 @@
     "ssh_username": "ubuntu",
     "ami_name": "blue-teams-jenkins-image-{{timestamp}}",
     "tags": {
-       "Name": "Blue-team-jenkins+A+A+D+K+P+T"
+       "Name": "Blue-team-jenkins-with-tooling"
     }
   }],
   "provisioners": [
@@ -34,8 +34,7 @@
        "./install_terraform.sh",
        "./install_make.sh",
        "./install_packer.sh",
-       "./install_kubectl.sh",
-       "./install_aws_iam_authenticator.sh"
+       "./install_kubectl.sh"
        ]
    },
    {
