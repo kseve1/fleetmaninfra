@@ -20,7 +20,7 @@ resource "aws_key_pair" "dsw-key" {
 
 resource "aws_instance" "webserver" {
   ami           = "${data.aws_ami.blue-ami.id}"
-  instance_type = "t2.micro"
+  instance_type = "t3.medium"
   /*iam_instance_profile = var.iam_role*/
   key_name = "dsw-key"
   security_groups = [
