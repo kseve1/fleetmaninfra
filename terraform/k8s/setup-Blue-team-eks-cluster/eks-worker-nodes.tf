@@ -113,7 +113,7 @@ resource "aws_launch_configuration" "Blue-team-terraform-eks-lauch-config" {
   associate_public_ip_address = true
   iam_instance_profile        = "${aws_iam_instance_profile.Blue-team-terraform-eks-node.name}"
   image_id                    = "${data.aws_ami.eks-worker.id}"
-  instance_type               = "m4.large"
+  instance_type               = "t3.medium"
   name_prefix                 = "Blue-team-terraform-eks-node"
   security_groups             = ["${aws_security_group.Blue-team-terraform-eks-node-sg.id}"]
   user_data_base64            = "${base64encode(local.Blue-team-terraform-eks-node-userdata)}"
