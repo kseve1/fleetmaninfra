@@ -1,9 +1,9 @@
 variable "bucket_name" {
-  default = "blue-team-terraform-jenkins"
+  default = "blue-team-terraform-s3-bucket"
 }
 
 variable "name_tag" {
-  default = "Blue Team Terraform Bucket"
+  default = "Blue Team Terraform S3 Bucket"
 }
 
 variable "owner_tag" {
