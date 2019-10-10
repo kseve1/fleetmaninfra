@@ -18,7 +18,7 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
         image: 090107652998.dkr.ecr.eu-central-1.amazonaws.com/blueteam:fm-webapp
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         readinessProbe:
           httpGet:
             path: /

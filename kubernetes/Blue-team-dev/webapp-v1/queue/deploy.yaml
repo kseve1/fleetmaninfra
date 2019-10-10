@@ -15,7 +15,7 @@ spec:
       containers:
       - name: queue
         image: 090107652998.dkr.ecr.eu-central-1.amazonaws.com/blueteam:fm-queue
-        imagePullPolicy: Never
+        imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
