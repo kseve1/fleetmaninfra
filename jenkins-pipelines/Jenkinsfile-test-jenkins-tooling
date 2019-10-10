@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initialise') {
+            steps {
+                sh "rm -rf fleetmaninfra"
+                sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+            }
+        }
+        stage('Tool-Test') {
+            steps {
+                sh 'packer version'
+                sh 'ansible --version'
+                sh 'terraform version'
+                sh 'docker version'
+                sh 'make --version'
+                sh 'kubectl --help'
+            }
+        }
+    }
+}

@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Initialise') {
+            steps {
+		      sh 'rm -rf fleetmaninfra'
+              sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+		      echo "Initialising job - cloning repo"
+                  }
+            }
+        stage('TF-init') {
+            steps {
+                      dir("fleetmaninfra/terraform/k8s/setup-Blue-team-eks-cluster") {
+                      echo "Initializing Terraform..."
+                      sh 'terraform init -backend-config=backend.hcl'
+                  }
+               }
+            }
+        stage('TF-destroy') {
+            steps {
+                     dir("fleetmaninfra/terraform/k8s/setup-Blue-team-eks-cluster") {
+                     echo "Destroying Terraform..."
+                     sh 'terraform destroy --auto-approve'
+                     }
+                  }
+            }
+        }
+    }
