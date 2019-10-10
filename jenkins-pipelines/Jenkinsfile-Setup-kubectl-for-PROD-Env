@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    environment {
+       KUBECONFIG='/home/ubuntu/.kube/config'
+   }
+
+    stages {
+        stage('Initialise') {
+            steps {
+		      sh 'rm -rf fleetmaninfra'
+              sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+		      echo "Initialising job - cloning repo"
+                  }
+            }
+        stage('TF-init') {
+            steps {
+                      dir("fleetmaninfra/terraform/k8s/setup-Blue-team-PROD-eks-cluster") {
+                      echo "Initializing Terraform..."
+                      sh 'terraform init -backend-config=backend.hcl'
+                  }
+               }
+            }
+        stage('setup-kubectl') {
+            steps {
+                     dir("fleetmaninfra/terraform/k8s/setup-Blue-team-PROD-eks-cluster") {
+                     echo "Getting kubectl .config..."
+                     sh 'terraform output kubeconfig > $KUBECONFIG'
+                     }
+                  }
+            }
+        stage('setup-config_map') {
+            steps {
+                     dir("fleetmaninfra/terraform/k8s/setup-Blue-team-PROD-eks-cluster") {
+                     echo "Getting kubectl config_map..."
+                     sh 'terraform output config_map_aws_auth > config_map_aws_auth.yml'
+                     sh 'kubectl apply -f config_map_aws_auth.yml'
+                     }
+                  }
+            }
+        stage('test-kubectl') {
+            steps {
+                     dir("fleetmaninfra/terraform/k8s/setup-Blue-team-PROD-eks-cluster") {
+                     echo "Testing kubectl..."
+                     sh 'kubectl get all'
+                     }
+                  }
+            }
+        }
+    }
