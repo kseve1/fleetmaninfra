@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: position-simulator
-        image: 090107652998.dkr.ecr.eu-central-1.amazonaws.com/blueteam:fm-position-simulator
+        image: 090107652998.dkr.ecr.eu-central-1.amazonaws.com/positionsimulator:latest
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice

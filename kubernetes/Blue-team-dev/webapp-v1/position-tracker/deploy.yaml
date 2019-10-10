@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: position-tracker
-        image: 090107652998.dkr.ecr.eu-central-1.amazonaws.com/blueteam:fm-position-tracker
+        image: 090107652998.dkr.ecr.eu-central-1.amazonaws.com/positiontracker:latest
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
