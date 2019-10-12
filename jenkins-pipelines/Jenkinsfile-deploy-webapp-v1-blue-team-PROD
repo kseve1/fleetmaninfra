@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    environment {
+       KUBECONFIG='/home/ubuntu/.kube/config'
+    }
+
+    stages {
+        stage('Initialise') {
+            steps {
+		      sh 'rm -rf fleetmaninfra'
+                      sh 'git clone https://github.com/kseve1/fleetmaninfra.git'
+		      echo "Initialising job - cloning repo"
+                  }
+            }
+        stage('deploy') {
+            steps {
+                      dir("fleetmaninfra/kubernetes/Blue-team-prod/webapp-v1") {
+                      echo "Deploying wepapp-v1..."
+                      sh 'make deploy'
+                  }
+               }
+            }
+        stage('smoke-test') {
+            steps {
+                     dir("fleetmaninfra/kubernetes/Blue-team-prod/webapp-v1") {
+                     echo "Running deployment smoke test..."
+                     }
+                  }
+            }
+        }
+    }
